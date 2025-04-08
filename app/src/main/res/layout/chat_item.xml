@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/chatPhotoCircle"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/circle_shape"
+        android:backgroundTint="#FFC542"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/chatPhotoIcon"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:src="@drawable/img_1"
+        app:layout_constraintBottom_toBottomOf="@id/chatPhotoCircle"
+        app:layout_constraintEnd_toEndOf="@id/chatPhotoCircle"
+        app:layout_constraintStart_toStartOf="@id/chatPhotoCircle"
+        app:layout_constraintTop_toTopOf="@id/chatPhotoCircle" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/chatPersonName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/alice_smith"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@id/chatPhotoCircle"
+        app:layout_constraintTop_toTopOf="@id/chatPhotoCircle" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textMessages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="@string/great_i_will_have_a_look"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@id/chatPersonName"
+        app:layout_constraintTop_toBottomOf="@id/chatPersonName" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="25dp"
+        android:text="@string/_4_20pm"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/chatPersonName" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textAmount"
+        android:layout_width="17dp"
+        android:layout_height="17dp"
+        android:layout_marginTop="6dp"
+        android:visibility="visible"
+        android:background="@drawable/circle_shape"
+        android:backgroundTint="#3ED598"
+        android:text="@string/_3"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@id/textTime"
+        app:layout_constraintTop_toBottomOf="@id/textTime" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="76dp"
+        android:background="#B8C2C0"
+        app:layout_constraintStart_toEndOf="@id/chatPhotoCircle"
+        app:layout_constraintTop_toBottomOf="@id/chatPhotoCircle" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
