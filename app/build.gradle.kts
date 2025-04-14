@@ -42,7 +42,11 @@ android {
 
 dependencies {
 
-
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.6")
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.8.6")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
+    kapt ("com.squareup.moshi:moshi-kotlin-codegen:1.15.1")
     implementation ("com.github.bumptech.glide:glide:4.16.0")
     implementation ("com.squareup.moshi:moshi:1.15.1")
     implementation ("com.squareup.moshi:moshi-kotlin:1.15.1")

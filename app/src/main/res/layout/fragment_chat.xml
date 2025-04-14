@@ -20,6 +20,7 @@
         android:textColor="#96A7AF"
         android:textColorHint="#96A7AF"
         android:textSize="16sp"
+        android:inputType="text"
         app:layout_constraintEnd_toStartOf="@id/settingsButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -28,10 +29,10 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/searchIcon"
         android:layout_width="18dp"
-        android:visibility="visible"
         android:layout_height="18dp"
         android:layout_marginStart="24dp"
         android:src="@drawable/img"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@id/searchBar"
         app:layout_constraintStart_toStartOf="@id/searchBar"
         app:layout_constraintTop_toTopOf="@id/searchBar" />
@@ -59,11 +60,15 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginTop="24dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/searchBar"
         app:layout_constraintTop_toBottomOf="@id/searchBar" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

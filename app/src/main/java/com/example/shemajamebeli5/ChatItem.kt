@@ -12,7 +12,7 @@ data class ChatItem(
     @Json(name = "last_active") val lastActive: String,
     @Json(name = "unread_messages") val unreadMessages: Int,
     @Json(name = "is_typing") val isTyping: Boolean,
-    @Json(name = "last_message_sent") val lastMessageSent: String
+    @Json(name = "laste_message_type") val lastMessageType: String
 ) {
     val profileIconResId: Int
         get() = when {

@@ -1,44 +1,62 @@
 package com.example.shemajamebeli5
 
-import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.shemajamebeli5.databinding.FragmentChatBinding
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.Types
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import java.io.InputStreamReader
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class ChatFragment : BaseFragment<FragmentChatBinding>(FragmentChatBinding::inflate) {
+
+    private val viewModel: ChatViewModel by viewModels()
+    private var fullChatList: List<ChatItem> = emptyList()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val chatList = parseJsonFromAssets(requireContext())
-
         with(binding.recyclerView) {
             layoutManager = LinearLayoutManager(context)
-            adapter = ChatAdapter(chatList)
+            adapter = ChatAdapter()
         }
+
+        setupSearchBar()
+        viewModel.loadConversations()
+        observeChatList()
     }
 
-    private fun parseJsonFromAssets(context: Context): List<ChatItem> {
-        val moshi = Moshi.Builder()
-            .add(KotlinJsonAdapterFactory())
-            .build()
+    private fun setupSearchBar() {
+        binding.searchBar.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                val query = s.toString().trim()
+                filterChats(query)
+            }
+        })
+    }
 
-        val type = Types.newParameterizedType(List::class.java, ChatItem::class.java)
-        val adapter = moshi.adapter<List<ChatItem>>(type)
+    private fun filterChats(query: String) {
+        val filteredList = if (query.isEmpty()) {
+            fullChatList
+        } else {
+            fullChatList.filter { chatItem ->
+                chatItem.owner.contains(query, ignoreCase = true)
+            }
+        }
+        (binding.recyclerView.adapter as ChatAdapter).updateChats(filteredList)
+    }
 
-        val inputStream = context.assets.open("conversations.json")
-        val reader = InputStreamReader(inputStream)
-        return adapter.fromJson(reader)!!.also {
-            reader.close()
-            inputStream.close()
+    private fun observeChatList() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.dataFlow.collectLatest { chatList ->
+                fullChatList = chatList
+                filterChats(binding.searchBar.text.toString().trim())
+            }
         }
     }
 }
