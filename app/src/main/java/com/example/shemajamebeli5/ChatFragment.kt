@@ -26,7 +26,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>(FragmentChatBinding::infl
 
         setupSearchBar()
         viewModel.loadConversations()
-        observeChatList()
+        observeChatList()//testing
     }
 
     private fun setupSearchBar() {
